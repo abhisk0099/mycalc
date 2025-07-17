@@ -1,36 +1,87 @@
-function appendToDisplay(value) {
-  document.getElementById("display").value += value;
+:root {
+  --bg: #ffffff;
+  --text: #000000;
+  --button: #f0f0f0;
+  --accent: #4caf50;
 }
 
-function clearDisplay() {
-  document.getElementById("display").value = "";
+.dark {
+  --bg: #121212;
+  --text: #ffffff;
+  --button: #2c2c2c;
+  --accent: #81c784;
 }
 
-function deleteLast() {
-  const display = document.getElementById("display");
-  display.value = display.value.slice(0, -1);
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
 }
 
-function calculateResult() {
-  const display = document.getElementById("display");
-  try {
-    const result = eval(display.value);
-    addToHistory(display.value + " = " + result);
-    display.value = result;
-  } catch {
-    alert("Invalid Expression");
-  }
+.container {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  text-align: center;
 }
 
-function addToHistory(entry) {
-  const historyList = document.getElementById("historyList");
-  const li = document.createElement("li");
-  li.textContent = entry;
-  historyList.prepend(li);
+.calculator {
+  background: var(--button);
+  padding: 10px;
+  border-radius: 10px;
 }
 
-function toggleTheme() {
-  const body = document.body;
-  body.classList.toggle("light");
-  body.classList.toggle("dark");
+#display {
+  width: 100%;
+  height: 60px;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-align: right;
+  padding: 10px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  padding: 15px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: #388e3c;
+}
+
+#theme-toggle {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#history {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-top: 10px;
+  max-height: 100px;
+  overflow-y: auto;
 }
